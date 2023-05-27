@@ -272,7 +272,7 @@ public:
   hmac_t(hash_e type) : alg(hash_alg_t::get(type)) 
   { 
 #ifdef OPENSSL_HMAC_PTR
-    ctx_ptr = EVP_MAC_CTX_new();
+    ctx_ptr = EVP_MAC_CTX_new(NULL);
 #else
     EVP_MAC_init(&ctx); 
 #endif
