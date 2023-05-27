@@ -30,6 +30,7 @@ COMMON_CPPFLAGS = \
 	-fno-strict-aliasing \
 	-Wno-unused \
 	-Wno-switch \
+	-Werror=deprecated-declarations \
 	-Wno-switch-enum \
 	-Werror \
 	-mpclmul \
