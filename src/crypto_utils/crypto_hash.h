@@ -272,17 +272,17 @@ public:
   hmac_t(hash_e type) : alg(hash_alg_t::get(type)) 
   { 
 #ifdef OPENSSL_HMAC_PTR
-    ctx_ptr = HMAC_CTX_new();
+    ctx_ptr = EVP_MAC_CTX_new();
 #else
-    HMAC_CTX_init(&ctx); 
+    EVP_MAC_init(&ctx); 
 #endif
   }
   ~hmac_t() 
   { 
 #ifdef OPENSSL_HMAC_PTR
-    if (ctx_ptr) HMAC_CTX_free(ctx_ptr);
+    if (ctx_ptr) EVP_MAC_CTX_free(ctx_ptr);
 #else
-    HMAC_CTX_cleanup(&ctx); 
+    EVP_MAC_CTX_free(&ctx); 
 #endif
   }
 
@@ -297,9 +297,9 @@ public:
 private:
   const hash_alg_t& alg;
 #ifdef OPENSSL_HMAC_PTR
-  HMAC_CTX* ctx_ptr;
+  EVP_MAC_CTX* ctx_ptr;
 #else
-  HMAC_CTX ctx;
+  EVP_MAC_CTX ctx;
 #endif
 };
 
